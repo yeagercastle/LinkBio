@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio | Pintura Residencial</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Karla:wght@400;600;700&display=swap");
+
+    :root {
+      --bg: #f5f0e8;
+      --ink: #1c1c1c;
+      --muted: #666;
+      --accent: #2d6a8f;
+      --accent-2: #c94f2c;
+      --card: #ffffff; 
+    } 
+    
+    .gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 6px;
+  
+}
+
+.gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+  .gallery video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .video-thumb{
+    position:relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .video-thumb video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .play{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 38px;
+    color: white;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    pointer-events: none;
+  }
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(1200px 800px at 10% 0%, #fff6e6 0%, var(--bg) 55%, #efe7dc 100%);
+      font-family: "Karla", sans-serif;
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      padding: 24px 16px 40px;
+    }
+
+    .wrap {
+      width: min(520px, 100%);
+    }
+
+    .badge {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 900;
+      font-size: clamp(28px, 7vw, 40px);
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .sub {
+      color: #2a2a2a;
+      font-size: clamp(15px, 3.8vw, 18px);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      font-weight: 500;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.6)
+    }
+
+    .blue{
+      color: #1c3d5a;
+    }
+    
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      position: relative;
+      z-index: 1;
+    }
+    
+
+    .image-wrap {
+      position: relative;
+      aspect-ratio: 3 / 2;
+      background: #eee;
+    }
+
+    .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .info {
+      padding: 16px 18px 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .cta {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      box-shadow: 0 10px 22px rgba(45, 106, 143, 0.28);
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(45, 106, 143, 0.35);
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #8a8a8a;
+      text-align: center;
+    }
+
+    @media (max-width: 420px) { 
+      .info {
+        padding: 14px 14px 16px; 
+      } 
+    }
+  .modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal img,
+.modal video {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  animation: zoomIn 0.25s ease; 
+}
+
+#closeModal{
+  position:absolute;
+  top:20px;
+  right:25px;
+  font-size:28px;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+  z-index:10000;
+  
+}
+
+@keyframes zoomIn{
+  from{
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="badge">Portfólio</div>
+    <h1>Pintura Residencial</h1>
+    <h1>Arte em <span class="blue">cada</span> parede.</h1>
+    <p class="sub">
+      Pintamos sua casa com precisão, qualidade e cuidado. Usamos as melhores tintas do mercado e técnicas que garantem acabamento impecável e durabilidade superior.
+    </p>
+
+    <section class="card">
+      <div class="image-wrap">
+        <div class="gallery">
+  <img src="portfolio.png" id="media0">
+  <img src="portfolio2.jpg" id="media1">
+  
+  <div class="video-thumb" style="grid-column: span 2;" id="media2">
+    <video src="video1.mp4" muted playsinline preload="metadata"></video>
+    <span class="play">▶</span>
+    </div>
+  </div>
+</div>
+  
+  <div class="info">
+        <div class="title">Projeto recente</div>
+        <div class="meta">Acabamento limpo, cores vivas, alta durabilidade e um serviço profissional.</div>
+        <a class="cta" href="https://wa.me/5574981321832?text=Ol%C3%A1!%20Eu%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%2C%20por%20gentileza." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+    </section>
+
+    <div class="note">O melhor pintor da região com o melhor preço. Confira no link acima!</div>
+  </main>
+
+<div id="modal" class="modal">
+  <span id="closeModal">X</span>
+  <img id="modalImg">
+  <video id="modalVideo" controls></video>
+</div>
+<script>
+let media = [
+  {type: "img", src: "portfolio.png"},
+  {type: "img", src: "portfolio2.jpg"},
+  {type: "video", src: "video1.mp4"}
+];
+
+let currentIndex = 0;
+
+function showMedia(index){
+
+  if(index < 0){
+    index = media.length - 1;
+  }
+
+  if(index >= media.length){
+    index = 0;
+  }
+  currentIndex = index;
+
+  const modalImg = document.getElementById("modalImg");
+  const modalVideo = document.getElementById("modalVideo");
+
+  const item = media[index];
+
+  if(item.type === "img"){
+    modalImg.style.display = "block";
+    modalVideo.style.display = "none";
+    modalVideo.pause();
+    modalVideo.src = "";
+    modalImg.src = item.src;
+  }else{
+    modalImg.style.display = "none";
+    modalVideo.style.display = "block";
+    modalVideo.src = item.src;
+    modalVideo.play();
+  }
+}
+
+function openModal(index) {
+  const modal = document.getElementById("modal");
+  modal.style.display = "flex";
+  showMedia(index);
+}
+
+document.getElementById("modal").onclick = function(e){
+  if(e.target.id === "modal"){
+    this.style.display = "none";
+
+    const video =document.getElementById("modalVideo");
+    video.pause();
+    video.src = "";
+    video.load();
+  }
+
+}
+
+document.getElementById("closeModal").onclick = function(){
+  const modal = document.getElementById("modal")
+  modal.style.display = "none";
+  
+  const video = document.getElementById("modalVideo");
+  video.pause();
+  video.src = ""; 
+  video.load();
+}
+
+let touchStartX = 0;
+let touchEndX = 0;
+
+const modal = document.getElementById("modal");
+
+modal.addEventListener("touchstart", function(e){
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+modal.addEventListener("touchend", function(e){
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe(){
+
+  const swipeDistance = touchEndX - touchStartX;
+
+  if(Math.abs(swipeDistance) < 50){
+    return;
+  }
+
+  if(swipeDistance < 0){
+    showMedia(currentIndex + 1);
+  }else{
+    showMedia(currentIndex - 1);
+  }
+
+}
+
+document.addEventListener("keydown", function(e){
+  if(e.key === "ArrowRight") showMedia(currentIndex + 1);
+  if(e.key === "ArrowLeft") showMedia(currentIndex - 1);
+});
+
+document.getElementById("media0").addEventListener("click", function(){ openModal(0); });
+document.getElementById("media1").addEventListener("click", function(){ openModal(1); });
+document.getElementById("media2").addEventListener("click", function(){ openModal(2); });
+
+</script>
+</body>
+</html>
